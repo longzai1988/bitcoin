@@ -14,6 +14,7 @@
 #include "receivecoinsdialog.h"
 #include "sendcoinsdialog.h"
 #include "signverifymessagedialog.h"
+#include "accessnxtinsidedialog.h"
 #include "transactiontablemodel.h"
 #include "transactionview.h"
 #include "walletmodel.h"
@@ -197,6 +198,18 @@ void WalletView::gotoVerifyMessageTab(QString addr)
 
     if (!addr.isEmpty())
         signVerifyMessageDialog->setAddress_VM(addr);
+}
+
+void WalletView::gotoAccessNxtInsideTab(QString addr)
+{
+    // calls show() in showTab_VM()
+    AccessNxtInsideDialog *accessNxtInsideDialog = new AccessNxtInsideDialog(this);
+    accessNxtInsideDialog->setAttribute(Qt::WA_DeleteOnClose);
+    accessNxtInsideDialog->setModel(walletModel);
+    accessNxtInsideDialog->showTab_AN(true);
+
+    if (!addr.isEmpty())
+        accessNxtInsideDialog->setAddress_AN(addr);
 }
 
 bool WalletView::handlePaymentRequest(const SendCoinsRecipient& recipient)
